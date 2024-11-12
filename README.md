@@ -27,7 +27,7 @@ This is a customizable dashboard built with Next.js, MongoDB,shadcCN UI and Tail
 ## Technologies Used
 
 ### Frontend:
-- **Next.js with TypeScript**
+- **Next.js **
 - **ShadCN UI** (for UI components)
 - **Tailwind CSS** (for styling)
 
