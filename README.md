@@ -21,7 +21,7 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
 
-PROJECT
+## PROJECT -customizable dashboard implementation(Responsive UI)
 This is a customizable dashboard built with Next.js, MongoDB,shadcCN UI and Tailwind CSS. The application allows users to manage widget visibility on their dashboard, with preferences persisted across sessions.
 
 ## Technologies Used
