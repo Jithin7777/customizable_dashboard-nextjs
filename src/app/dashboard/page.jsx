@@ -43,9 +43,9 @@ const Dashboard = () => {
     fetchWidgets();
   }, []);
 
-  if (!widgetPreferences || widgetPreferences.length === 0) {
-    return <div>No widgets available</div>;
-  }
+  // if (!widgetPreferences || widgetPreferences.length === 0) {
+  //   return <div>No widgets available</div>;
+  // }
 
   const handleWidgetSelect = (event) => {
     const selectedWidgetId = event.target.value;
