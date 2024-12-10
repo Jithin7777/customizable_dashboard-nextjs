@@ -40,8 +40,8 @@ export const WidgetProvider = ({ children }) => {
       "widgetPreferences",
       JSON.stringify(updatedPreferences)
     );
-
-    const res = await fetch("/api/widgets", {
+ 
+    const res = await fetch("http://localhost:3000/api/widgets", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ widgetId, isVisible }),

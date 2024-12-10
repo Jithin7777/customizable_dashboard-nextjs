@@ -37,7 +37,7 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <Link href={item.url}>
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-2 ">
                         <item.icon />
                         <span>{item.title}</span>
                       </div>
