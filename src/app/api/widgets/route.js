@@ -87,23 +87,28 @@
 
 
 
+
 import connectToDB from "@/database";
 import Widget from "@/models/widget";
+
+// Helper function to add CORS headers
+const addCorsHeaders = (res) => {
+  res.headers.set('Access-Control-Allow-Origin', 'https://customizable-dashboard-nextjs.vercel.app'); // Replace with your frontend URL
+  res.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT');
+  res.headers.set('Access-Control-Allow-Headers', 'Content-Type');
+};
 
 // GET request to retrieve all widgets
 export async function GET(req) {
   await connectToDB();
   try {
     const widgets = await Widget.find();
-    return new Response(JSON.stringify(widgets), {
+    const res = new Response(JSON.stringify(widgets), {
       status: 200,
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "https://customizable-dashboard-nextjs.vercel.app", // Replace with your frontend URL
-        "Access-Control-Allow-Methods": "GET, POST, PUT",
-        "Access-Control-Allow-Headers": "Content-Type",
-      },
+      headers: { "Content-Type": "application/json" },
     });
+    addCorsHeaders(res);
+    return res;
   } catch (error) {
     return new Response(
       JSON.stringify({ message: "Error fetching widgets", error }),
@@ -118,28 +123,26 @@ export async function GET(req) {
 // POST request to create a new widget
 export async function POST(req) {
   await connectToDB();
+
   try {
     const { name, type, isVisible, data } = await req.json();
     console.log("Received data:", data);
     if (!name || !type) {
       return new Response(
         JSON.stringify({ message: "Name and type are required" }),
-        { status: 400, headers: { "Content-Type": "application/json" } }
+        { status: 400 }
       );
     }
 
     const newWidget = new Widget({ name, type, isVisible, data });
     await newWidget.save();
 
-    return new Response(JSON.stringify(newWidget.toObject()), {
+    const res = new Response(JSON.stringify(newWidget.toObject()), {
       status: 201,
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "https://customizable-dashboard-nextjs.vercel.app",
-        "Access-Control-Allow-Methods": "GET, POST, PUT",
-        "Access-Control-Allow-Headers": "Content-Type",
-      },
+      headers: { "Content-Type": "application/json" },
     });
+    addCorsHeaders(res);
+    return res;
   } catch (error) {
     return new Response(
       JSON.stringify({ message: "Error creating widget", error }),
@@ -167,15 +170,12 @@ export async function PUT(req) {
       });
     }
 
-    return new Response(JSON.stringify(widget), {
+    const res = new Response(JSON.stringify(widget), {
       status: 200,
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "https://customizable-dashboard-nextjs.vercel.app",
-        "Access-Control-Allow-Methods": "GET, POST, PUT",
-        "Access-Control-Allow-Headers": "Content-Type",
-      },
+      headers: { "Content-Type": "application/json" },
     });
+    addCorsHeaders(res);
+    return res;
   } catch (error) {
     return new Response(
       JSON.stringify({ message: "Error updating widget visibility", error }),
